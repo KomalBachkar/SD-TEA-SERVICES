@@ -59,12 +59,17 @@
         </a>
         <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="tables-general.html">
+            <a href="${contextRoot}/admin/sales.html">
               <i class="bi bi-circle"></i><span>Sales Reports</span>
             </a>
           </li>
           <li>
-            <a href="tables-data.html">
+            <a href="${contextRoot}/admin/sales-details.html">
+              <i class="bi bi-circle"></i><span>Sales Details</span>
+            </a>
+          </li>
+          <li>
+            <a href="${contextRoot}/admin/sales-report.html">
               <i class="bi bi-circle"></i><span>Report Details</span>
             </a>
           </li>

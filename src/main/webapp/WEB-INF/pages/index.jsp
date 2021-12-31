@@ -65,14 +65,7 @@
 
 <body>
 
-	<c:if test="${not empty message}">
-		<div class="alert alert-success alert-dismissible fade show"
-			role="alert">
-			${message}
-			<button type="button" class="btn-close" data-bs-dismiss="alert"
-				aria-label="Close"></button>
-		</div>
-	</c:if>
+	
 
 	<c:if test="${sessionScope.role==null}">
 		<%@include file="pages-login.jsp"%>
@@ -113,6 +106,12 @@
 		</c:if>
 		<c:if test="${userClickAdminBranchDetails==true}">
 			<%@include file="admin-branch-view.jsp"%>
+		</c:if>
+		<c:if test="${userClickSalesAdmin==true}">
+			<%@include file="admin-sales.jsp"%>
+		</c:if>
+		<c:if test="${userClickSalesDetailsAdmin==true}">
+			<%@include file="admin-sales-details.jsp"%>
 		</c:if>
 	</c:if>
 

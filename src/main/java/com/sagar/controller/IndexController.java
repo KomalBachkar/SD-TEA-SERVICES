@@ -2,6 +2,7 @@ package com.sagar.controller;
 
 import java.util.Collections;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -48,12 +49,9 @@ public class IndexController {
 	}
 	
 	@PostMapping(value = { "/admin-validation" })
-	String getAdminLogin(@RequestParam String email, @RequestParam String password, HttpSession session,
+	String getAdminLogin(@RequestParam String email, @RequestParam String password, HttpServletRequest request,
 			Model model) {
-		model.addAttribute("title", Constant.TITLE);
-		model.addAttribute("header_name", Constant.HEADER_NAME);
-		model.addAttribute("action", Action.ADMIN);
-
+		
 		Customer customer = customerRepository.findByEmail(email);
 
 		if (customer == null) {
@@ -65,22 +63,18 @@ public class IndexController {
 			model.addAttribute("message", "Email & Password is not matching!");
 			return "/pages-admin";
 		}
+		HttpSession session=request.getSession(true);
 		addUserInSession(session, customer.getEmail(), Constant.ADMIN_ROLE);
 		// set the name and the id
 		session.setAttribute("userModel", customer);
 		session.setAttribute("userID", customer.getId());
-		model.addAttribute("userClickAdminHome", true);
-		model.addAttribute("companyName", Constant.HEADER_NAME);
 		return "redirect:/admin/admin.html";
 	}
 
 	@PostMapping(value = { "/login-validation" })
-	String getLogin(@RequestParam String email, @RequestParam String password, HttpSession session,
+	String getLogin(@RequestParam String email, @RequestParam String password, HttpServletRequest request,
 			Model model) {
-		model.addAttribute("title", Constant.TITLE);
-		model.addAttribute("header_name", Constant.HEADER_NAME);
-		model.addAttribute("action", Action.LOGIN);
-
+		
 		Customer customer = customerRepository.findByEmail(email);
 
 		if (customer == null) {
@@ -92,12 +86,11 @@ public class IndexController {
 			model.addAttribute("message", "Email & Password is not matching!");
 			return "/pages-login";
 		}
+		HttpSession session=request.getSession(true);
 		addUserInSession(session, customer.getEmail(), Constant.USER_ROLE);
 		// set the name and the id
 		session.setAttribute("userModel", customer);
 		session.setAttribute("userID", customer.getId());
-		model.addAttribute("userClickUserHome", true);
-		model.addAttribute("companyName", Constant.HEADER_NAME);
 		return "redirect:/customer/index.html";
 	}
 

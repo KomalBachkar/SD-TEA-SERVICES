@@ -1,6 +1,47 @@
 
 $(function() {
 
+var $salesDetailsList = $('#salesDetailsListTable');
+
+	if ($salesDetailsList.length) {
+
+		var jsonUrl = jsonUrl = window.contextRoot + '/admin/all/sales';
+
+		$salesDetailsList
+				.DataTable({
+					lengthMenu : [ [ 3, 5, 10, -1 ],
+							[ '3 Records', '5 Records', '10 Records', 'ALL' ] ],
+					pageLength : 5,
+					ajax : {
+						url : jsonUrl,
+						dataSrc : ''
+					},
+					columns : [
+						
+							{
+								data : 'salesId',
+							},
+							{
+								data : 'branchName',
+							},
+							{
+								data : 'totalSales',
+							},
+							{
+								data : 'filledBy',
+							},
+							{
+								data : 'createdDate',
+							}
+							
+							
+						]
+
+				});
+	}
+	
+	
+
 /* .......................................... */
 
 	var $productDetailslist = $('#productDetailsListTable');
